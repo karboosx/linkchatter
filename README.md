@@ -5,8 +5,8 @@
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
 ```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
+$ git clone git@github.com:karboosx/linkchatter.git # or clone your own fork
+$ cd linkchatter
 $ npm install
 $ npm start
 ```
