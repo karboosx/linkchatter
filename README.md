@@ -13,6 +13,10 @@ $ npm start
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
+## History
+
+If you want to enable saving history, you have to make Postgres database with schema available in sql.sql file and change .env file.
+
 ## Deploying to Heroku
 
 ```
