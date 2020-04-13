@@ -182,3 +182,8 @@ form button {
     height: 0px;
     overflow: hidden;
 }
+
+.message img {
+    max-height: 100%;
+    max-width:100%;
+}
