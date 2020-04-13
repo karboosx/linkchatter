@@ -1,7 +1,3 @@
-var dotenv = require('dotenv');
-
-dotenv.config();
-
 var port = process.env.PORT || 3000;
 var keySalt = process.env.APP_KEY || 'testowy';
 var registerHistory = process.env.REGISTER_HISTORY || 'false';
