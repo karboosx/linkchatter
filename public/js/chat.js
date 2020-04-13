@@ -21,7 +21,7 @@ $(function () {
 
     var $history_button = $('#history_button');
 
-    var registerHistory = true;
+    var registerHistory = false;
 
     if (window.localStorage.getItem('register_history') == 'true'){
         registerHistory =true;
