@@ -16,13 +16,15 @@
   <ul id="messages"></ul>
 
   <form action="">
+    <input type="file" class="hidden-file" id="file" accept="image/*">
     <div class="input-group">
       <span class="input-group-btn">
-        <div class="btn btn-default" type="button" value="With history" id="history_button"><i class="fa fa-archive" aria-hidden="true"></i></div>
+        <button class="btn btn-default" type="button" value="With history" id="history_button"><i class="fa fa-archive" aria-hidden="true"></i></button>
       </span>
       <input type="text" class="form-control" placeholder="Enter message" autofocus id="m" autocomplete="off" disabled="disabled">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit" id="m_send" disabled="disabled"><i class="fa fa-paper-plane-o"></i></button>
+        <button class="btn btn-default" type="button" value="Send picture" id="send_picture" disabled="disabled"><i class="fa fa-file" aria-hidden="true"></i></button>
       </span>
     </div><!-- /input-group -->
   </form>

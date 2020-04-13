@@ -64,6 +64,17 @@ function registerBehavior(io) {
             chatFunctions.insetToHistory(socket, data);
 
         });
+
+        socket.on('image', function(data) {
+            data.user_id = socket.id;
+            data.timestamp = (+new Date());
+            chatFunctions.sendToMyRooms(socket, data);
+
+            if (data.hasOwnProperty('register_history') && data.register_history == false) return;
+
+            chatFunctions.insetToHistory(socket, data);
+
+        });
     });
 
 }

@@ -16,6 +16,8 @@ $(function () {
     var myID = undefined;
 
     var $input_screen = $('#input_screen');
+    var $send_picture = $('#send_picture');
+    var $file = $('#file');
 
     var $history_button = $('#history_button');
 
@@ -131,8 +133,37 @@ $(function () {
                 })
             }
         });
+        $send_picture.click(function (e) {
+            e.preventDefault();
+            $file.trigger('click');
+        });
 
+        $file.change(function(files) {
+            readFiles();
+        });
+
+        function readFiles(){
+            var files = $file[0].files;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+
+                uploadFile(file);
+            }
+            $file.val('');
+        }
+
+        function uploadFile(file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                sendMessage(e.target.result, 'image');
+            };
+
+            reader.readAsDataURL(file);
+
+        }
         function addMessage(data, type) {
+            console.log(data, type);
             data.type = data.type || 'normal';
 
             var $messsage = $('<li class="'+data.type+'">');
@@ -176,7 +207,12 @@ $(function () {
                 $messsage.append(icon);
             }
 
-            var message = $('<div class="message">').text(data.message);
+            if (data.type === 'image') {
+                var message = $('<div class="message">').html('<img src="'+data.message+'" />');
+            }else {
+                message = $('<div class="message">').text(data.message);
+            }
+
             $messsage.append(message);
 
             if (type == 'prepend') {
@@ -220,6 +256,8 @@ $(function () {
 
             if (data.type == 'message') {
                 addMessage(data);
+            }else if (data.type == 'image') {
+                addMessage(data);
             }else if (data.type == 'new_user' && myID != undefined && data.user_id != myID) {
                 addMessage({type: 'new_user', 'message': data.nickname+' joined to the conversation! '});
                 setOnline(data.count);
@@ -251,6 +289,7 @@ $(function () {
         function enableChatting() {
             $val.prop('disabled', false);
             $('#m_send').prop('disabled', false);
+            $('#send_picture').prop('disabled', false);
         }
 
         function setUp(data) {
@@ -263,17 +302,21 @@ $(function () {
 
             if ($val.val() == '') return;
 
-            socket.emit('message', {
-                type:'message',
-                message:$val.val(),
-                nickname:nickname,
-                register_history:registerHistory
-            });
+            sendMessage($val.val(), 'message');
             $val.val('');
             return false;
         });
 
         $val.focus();
+
+        function sendMessage(text, type) {
+            socket.emit('message', {
+                type:type,
+                message:text,
+                nickname:nickname,
+                register_history:registerHistory
+            });
+        }
     }
 
     function checkRequirements() {

@@ -12,3 +12,4 @@ Dockerfile
 docker-compose.yml
 .idea/
 bower_components/
+/package-lock.json
