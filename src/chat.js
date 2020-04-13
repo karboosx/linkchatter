@@ -26,7 +26,7 @@ var sendToMe = function(socket, data) {
 var insetToHistory = function(socket, data) {
     if (!chat.config.registerHistory) return;
 
-    database.query('INSERT INTO history (user_id, nickname, room, text, timestamp) VALUES ($1,$2,$3,$4,$5);', [socket.id,data.nickname || '', getRoomID(socket), data.message, (+new Date())], function(err, result) {
+    database.query('INSERT INTO history (user_id, nickname, room, text, type, timestamp) VALUES ($1,$2,$3,$4,$5,$6);', [socket.id,data.nickname || '', getRoomID(socket), data.message, data.type, (+new Date())], function(err, result) {
         if (err)
         { console.error(err); }
     });

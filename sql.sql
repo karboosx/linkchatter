@@ -5,5 +5,6 @@ CREATE TABLE history
   nickname text,
   room text,
   text text,
+  type varchar,
   "timestamp" bigint
 )

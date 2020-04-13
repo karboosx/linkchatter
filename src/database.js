@@ -11,6 +11,9 @@ var connect = function (config, callback) {
     pool = new pg.Client(config.databaseUrl);
 
     pool.connect(function(err, _client, done) {
+        if (err) {
+            console.error(err);
+        }
         client = _client;
         if (typeof callback == 'function') {
             callback(pool, _client);
